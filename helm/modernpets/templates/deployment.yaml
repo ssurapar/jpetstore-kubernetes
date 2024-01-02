@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: jpetstoreweb
-        image: "{{ .Values.image.repository }}/jpetstoreweb:{{ .Values.image.tag }}"
+        image: "{{ .Values.image.repository }}/jpetstore-web:{{ .Values.image.tag }}"
         imagePullPolicy: Always
         env:
           - name: VERSION
@@ -42,4 +42,10 @@ spec:
             port: 9080
           initialDelaySeconds: 10
           periodSeconds: 5
-
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "500Mi"
+            cpu: "500m"

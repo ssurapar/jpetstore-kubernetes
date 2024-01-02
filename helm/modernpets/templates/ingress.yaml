@@ -1,5 +1,5 @@
 {{- if not (.Values.isLB) }}
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: jpetstoreweb
@@ -16,8 +16,12 @@ spec:
   - host: "jpetstore-web.{{ .Values.httpHost }}"
     http:
       paths:
-      - backend:
-          serviceName: web
-          servicePort: 80
-        path: /
+        - path: /
+          pathType: ImplementationSpecific
+          backend:
+            service: 
+              name: web
+              port:
+                number: 80
+      
 {{- end }}
